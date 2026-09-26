@@ -13983,6 +13983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 723516461}
+  - component: {fileID: 723516462}
   m_Layer: 0
   m_Name: SpineWoodColony
   m_TagString: Untagged
@@ -14009,6 +14010,27 @@ Transform:
   - {fileID: 120903038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &723516462
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723516460}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 43.8311, y: 8.371746, z: 40.376022}
+  m_Center: {x: 9.538277, y: 3.6858726, z: -1.369484}
 --- !u!1001 &724628116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24465,6 +24487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1230357697}
+  - component: {fileID: 1230357698}
   m_Layer: 0
   m_Name: CrankTownColony
   m_TagString: Untagged
@@ -24510,6 +24533,27 @@ Transform:
   - {fileID: 701903952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1230357698
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230357696}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 21.610313, y: 8.328743, z: 71.38905}
+  m_Center: {x: -0.14719772, y: 2.0760074, z: -0.14826202}
 --- !u!1001 &1235950844
 PrefabInstance:
   m_ObjectHideFlags: 0
