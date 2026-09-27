@@ -19,10 +19,15 @@ public class FirstPersonPlayer : MonoBehaviour
     [Header("Camera Sway")]
     public float swayAmount = 2f;
     public float swaySpeed = 8f;
+    [Header("Footsteps")]
+    public AudioSource footstepSound;
+    public float walkStepInterval = 0.5f;
+    public float sprintStepInterval = 0.3f;
     private CharacterController controller;
     private Vector3 velocity;
     private Vector3 cameraStartPosition;
     private float bobTimer = 0f;
+    private float footstepTimer = 0f;
     private bool isMoving = false;
     private bool isSprinting = false;
     void Start()
@@ -30,7 +35,8 @@ public class FirstPersonPlayer : MonoBehaviour
         controller = GetComponent<CharacterController>();
         if (playerCamera != null)
         {
-            cameraStartPosition = playerCamera.localPosition;
+            cameraStartPosition =
+                playerCamera.localPosition;
         }
         else
         {
@@ -43,6 +49,7 @@ public class FirstPersonPlayer : MonoBehaviour
     {
         MovePlayer();
         HeadBob();
+        Footsteps();
     }
     void MovePlayer()
     {
@@ -68,11 +75,16 @@ public class FirstPersonPlayer : MonoBehaviour
             Keyboard.current.leftShiftKey.isPressed &&
             isMoving;
         float currentSpeed =
-            isSprinting ? sprintSpeed : moveSpeed;
+            isSprinting
+                ? sprintSpeed
+                : moveSpeed;
         controller.Move(
-            move * currentSpeed * Time.deltaTime
+            move *
+            currentSpeed *
+            Time.deltaTime
         );
-        if (controller.isGrounded && velocity.y < 0)
+        if (controller.isGrounded &&
+            velocity.y < 0)
         {
             velocity.y = -2f;
         }
@@ -84,19 +96,25 @@ public class FirstPersonPlayer : MonoBehaviour
         {
             velocity.y =
                 Mathf.Sqrt(
-                    jumpHeight * -2f * gravity
+                    jumpHeight *
+                    -2f *
+                    gravity
                 );
         }
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y +=
+            gravity *
+            Time.deltaTime;
         controller.Move(
-            velocity * Time.deltaTime
+            velocity *
+            Time.deltaTime
         );
     }
     void HeadBob()
     {
         if (playerCamera == null)
             return;
-        if (isMoving && controller.isGrounded)
+        if (isMoving &&
+            controller.isGrounded)
         {
             float bobSpeed =
                 isSprinting
@@ -106,12 +124,18 @@ public class FirstPersonPlayer : MonoBehaviour
                 isSprinting
                     ? sprintBobAmount
                     : walkBobAmount;
-            bobTimer += Time.deltaTime * bobSpeed;
+            bobTimer +=
+                Time.deltaTime *
+                bobSpeed;
             float bobX =
-                Mathf.Cos(bobTimer * 0.5f) *
+                Mathf.Cos(
+                    bobTimer * 0.5f
+                ) *
                 bobAmount;
             float bobY =
-                Mathf.Sin(bobTimer) *
+                Mathf.Sin(
+                    bobTimer
+                ) *
                 bobAmount;
             Vector3 targetPosition =
                 cameraStartPosition +
@@ -136,6 +160,27 @@ public class FirstPersonPlayer : MonoBehaviour
                     cameraStartPosition,
                     Time.deltaTime * 10f
                 );
+        }
+    }
+    void Footsteps()
+    {
+        if (footstepSound == null)
+            return;
+        if (!isMoving ||
+            !controller.isGrounded)
+        {
+            footstepTimer = 0f;
+            return;
+        }
+        float stepInterval =
+            isSprinting
+                ? sprintStepInterval
+                : walkStepInterval;
+        footstepTimer += Time.deltaTime;
+        if (footstepTimer >= stepInterval)
+        {
+            footstepTimer = 0f;
+            footstepSound.Play();
         }
     }
 }

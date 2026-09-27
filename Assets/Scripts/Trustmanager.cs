@@ -10,6 +10,8 @@ public class TrustManager : MonoBehaviour
     public float trustDecreaseAmount = 5f;
     public float trustDecreaseInterval = 30f;
     public float trustGainPerDelivery = 20f;
+    [Header("Trust Sound")]
+    public AudioSource trustGainedSound;
     [Header("UI")]
     public Slider trustBar;
     public TMP_Text trustText;
@@ -28,13 +30,23 @@ public class TrustManager : MonoBehaviour
         if (decreaseTimer >= trustDecreaseInterval)
         {
             decreaseTimer = 0f;
-            DecreaseTrust(trustDecreaseAmount);
+            DecreaseTrust(
+                trustDecreaseAmount
+            );
         }
     }
     public void IncreaseTrust(float amount)
     {
         trust += amount;
-        trust = Mathf.Clamp(trust, 0f, 100f);
+        trust = Mathf.Clamp(
+            trust,
+            0f,
+            100f
+        );
+        if (trustGainedSound != null)
+        {
+            trustGainedSound.Play();
+        }
         UpdateUI();
         Debug.Log(
             "Trust increased to " +
@@ -44,7 +56,11 @@ public class TrustManager : MonoBehaviour
     public void DecreaseTrust(float amount)
     {
         trust -= amount;
-        trust = Mathf.Clamp(trust, 0f, 100f);
+        trust = Mathf.Clamp(
+            trust,
+            0f,
+            100f
+        );
         UpdateUI();
         Debug.Log(
             "Trust decreased to " +

@@ -10,6 +10,8 @@ public class VillageDelivery : MonoBehaviour
     public TMP_Text deliveryPrompt;
     [Header("Delivery")]
     public int suppliesRequired = 1;
+    [Header("Delivery Sound")]
+    public AudioSource deliverySound;
     [Header("Delivery UI")]
     public GameObject deliveryOverlay;
     public TMP_Text deliveryMessage;
@@ -116,6 +118,10 @@ public class VillageDelivery : MonoBehaviour
             }
             isDelivering = false;
             yield break;
+        }
+        if (deliverySound != null)
+        {
+            deliverySound.Play();
         }
         if (TrustManager.Instance != null)
         {

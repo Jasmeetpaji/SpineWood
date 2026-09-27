@@ -7,6 +7,8 @@ public class MarketSupply : MonoBehaviour
     public TMP_Text collectPrompt;
     [Header("Supplies")]
     public int suppliesToGive = 1;
+    [Header("Sound")]
+    public AudioSource collectSound;
     private bool playerNearby = false;
     void Start()
     {
@@ -63,6 +65,10 @@ public class MarketSupply : MonoBehaviour
         {
             Debug.Log("Inventory is full!");
             return;
+        }
+        if (collectSound != null)
+        {
+            collectSound.Play();
         }
         Debug.Log(
             "Collected " +
